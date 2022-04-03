@@ -1,46 +1,31 @@
 package program;
 
+import entities.Peca;
+import entities.Tabuleiro;
+import entities.TipoPecaEnum;
+
+import java.util.Scanner;
+
 public class Application {
 
     public static void main(String[] args) {
-
-        Character[][] velha = new Character[3][3];
-        imprimeTabuleiroVazio(velha);
-        preencherPeca(velha, 1, 1, 'x');
-        preencherPeca(velha, 2, 1, 'x');
-        preencherPeca(velha, 3, 1, 'x');
-        preencherPeca(velha, 1, 2, 'o');
-        preencherPeca(velha, 2, 2, 'o');
-        preencherPeca(velha, 3, 2, 'o');
-        preencherPeca(velha, 1, 3, 'D');
-        preencherPeca(velha, 2, 3, 'D');
-        preencherPeca(velha, 3, 3, 'D');
-        imprimeTabuleiro(velha);
-
-
-    }
-
-    static void imprimeTabuleiroVazio(Character[][] velha) {
-        for (int i = 0; i < velha.length; i++) {
-            for (int j = 0; j < velha.length; j++) {
-                velha[i][j] = '-';
-            }
+        Scanner in = new Scanner(System.in);
+        Tabuleiro tabuleiro = new Tabuleiro();
+        tabuleiro.criarTabuleiro();
+        while (tabuleiro.verificarSeGanhou()) {
+            System.out.println("Insira uma peca: Coluna,Linha,TipoPeca");
+            String[] filds = in.nextLine().split(",");
+            tabuleiro.preencherPeca(new Peca(Integer.parseInt(filds[0]), Integer.parseInt(filds[1]), TipoPecaEnum.valueOf(filds[2])));
+            tabuleiro.imprimeTabuleiro();
         }
-        System.out.println("   1 2 3");
-        System.out.println("1  " + velha[0][0] + " " + velha[0][1] + " " + velha[0][2]);
-        System.out.println("2  " + velha[1][0] + " " + velha[1][1] + " " + velha[1][2]);
-        System.out.println("3  " + velha[2][0] + " " + velha[2][1] + " " + velha[2][2]);
-    }
+        System.out.println("Vencedor: " + tabuleiro.getVencedor());
 
-    static void preencherPeca(Character[][] velha, int coluna, int linha, Character a) {
-        velha[coluna - 1][linha - 1] = a;
-    }
+//        tabuleiro.preencherPeca(new Peca(2, 1, TipoPecaEnum.O));
+//        tabuleiro.preencherPeca(new Peca(3, 1, TipoPecaEnum.O));
+//        tabuleiro.imprimeTabuleiro();
+//        tabuleiro.verificarSeGanhou();
 
-    static void imprimeTabuleiro(Character[][] velha) {
-        System.out.println("   1 2 3");
-        System.out.println("1  " + velha[0][0] + " " + velha[0][1] + " " + velha[0][2]);
-        System.out.println("2  " + velha[1][0] + " " + velha[1][1] + " " + velha[1][2]);
-        System.out.println("3  " + velha[2][0] + " " + velha[2][1] + " " + velha[2][2]);
+
     }
 
 
