@@ -15,15 +15,22 @@ public class Tabuleiro {
     }
 
     public void preencherPeca(Peca peca) {
+        System.out.println(pecas.length);
         if (pecas[peca.getColuna() - 1][peca.getLinha() - 1].getTipoPeca() == TipoPecaEnum.O ||
                 pecas[peca.getColuna() - 1][peca.getLinha() - 1].getTipoPeca() == TipoPecaEnum.X) {
             throw new PecaException("Ja existe uma peca neste local");
         }
-        if (peca.getColuna() - 1 <= pecas.length && peca.getLinha() - 1 <= pecas.length) {
+
+        if (peca.getTipoPeca() == TipoPecaEnum.VAZIA) {
+            throw new PecaException("A PECA NAO PODE SER VAZIA");
+        }
+
+        if (peca.getColuna() - 1 < pecas.length && peca.getLinha() - 1 < pecas.length) {
             pecas[peca.getColuna() - 1][peca.getLinha() - 1] = new Peca(peca.getColuna() - 1, peca.getLinha() - 1, peca.getTipoPeca());
         } else {
             throw new PecaException("A coluna/linha nao existe no tabuleiro");
         }
+
 
     }
 

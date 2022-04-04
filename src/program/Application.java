@@ -13,10 +13,11 @@ public class Application {
         Tabuleiro tabuleiro = new Tabuleiro();
         tabuleiro.criarTabuleiro();
         int jogadas = 0;
+        Peca peca = null;
         while (tabuleiro.verificarSeGanhou() && jogadas < 9) {
             System.out.println("Insira uma peca: Coluna,Linha,TipoPeca");
             String[] filds = in.nextLine().split(",");
-            tabuleiro.preencherPeca(new Peca(Integer.parseInt(filds[0]), Integer.parseInt(filds[1]), TipoPecaEnum.valueOf(filds[2])));
+            tabuleiro.preencherPeca(peca = new Peca(Integer.parseInt(filds[0]), Integer.parseInt(filds[1]), TipoPecaEnum.valueOf(filds[2])));
             jogadas++;
             tabuleiro.imprimeTabuleiro();
         }
