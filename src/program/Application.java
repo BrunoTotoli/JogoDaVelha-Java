@@ -12,20 +12,18 @@ public class Application {
         Scanner in = new Scanner(System.in);
         Tabuleiro tabuleiro = new Tabuleiro();
         tabuleiro.criarTabuleiro();
-        while (tabuleiro.verificarSeGanhou()) {
+        int jogadas = 0;
+        while (tabuleiro.verificarSeGanhou() && jogadas < 9) {
             System.out.println("Insira uma peca: Coluna,Linha,TipoPeca");
             String[] filds = in.nextLine().split(",");
             tabuleiro.preencherPeca(new Peca(Integer.parseInt(filds[0]), Integer.parseInt(filds[1]), TipoPecaEnum.valueOf(filds[2])));
+            jogadas++;
             tabuleiro.imprimeTabuleiro();
         }
-        System.out.println("Vencedor: " + tabuleiro.getVencedor());
-
-//        tabuleiro.preencherPeca(new Peca(2, 1, TipoPecaEnum.O));
-//        tabuleiro.preencherPeca(new Peca(3, 1, TipoPecaEnum.O));
-//        tabuleiro.imprimeTabuleiro();
-//        tabuleiro.verificarSeGanhou();
-
-
+        if (tabuleiro.verificarSeGanhou())
+            System.out.println("Houve um empate");
+        else
+            System.out.println("Vencedor: " + tabuleiro.getVencedor());
     }
 
 

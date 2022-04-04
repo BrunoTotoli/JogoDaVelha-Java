@@ -15,7 +15,16 @@ public class Tabuleiro {
     }
 
     public void preencherPeca(Peca peca) {
-        pecas[peca.getColuna() - 1][peca.getLinha() - 1] = new Peca(peca.getColuna() - 1, peca.getLinha() - 1, peca.getTipoPeca());
+        if (pecas[peca.getColuna() - 1][peca.getLinha() - 1].getTipoPeca() == TipoPecaEnum.O ||
+                pecas[peca.getColuna() - 1][peca.getLinha() - 1].getTipoPeca() == TipoPecaEnum.X) {
+            throw new PecaException("Ja existe uma peca neste local");
+        }
+        if (peca.getColuna() - 1 <= pecas.length && peca.getLinha() - 1 <= pecas.length) {
+            pecas[peca.getColuna() - 1][peca.getLinha() - 1] = new Peca(peca.getColuna() - 1, peca.getLinha() - 1, peca.getTipoPeca());
+        } else {
+            throw new PecaException("A coluna/linha nao existe no tabuleiro");
+        }
+
     }
 
     public void imprimeTabuleiro() {
@@ -36,6 +45,13 @@ public class Tabuleiro {
                 return false;
             }
 
+            if (pecas[0][0].compareTo(pecas[1][1].getTipoPeca()) == 0 && pecas[0][0].compareTo(pecas[2][2].getTipoPeca()) == 0) {
+                vencedor = pecas[0][0].toString();
+                return false;
+            } else if (pecas[2][0].compareTo(pecas[1][1].getTipoPeca()) == 0 && pecas[2][0].compareTo(pecas[0][2].getTipoPeca()) == 0) {
+                vencedor = pecas[2][0].toString();
+                return false;
+            }
 
         }
         return true;
