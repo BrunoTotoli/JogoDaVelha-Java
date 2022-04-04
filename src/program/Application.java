@@ -21,7 +21,7 @@ public class Application {
             tabuleiro.imprimeTabuleiro();
         }
         if (tabuleiro.verificarSeGanhou())
-            System.out.println("Houve um empate");
+            System.out.println("Teve um empate");
         else
             System.out.println("Vencedor: " + tabuleiro.getVencedor());
     }
